@@ -1,12 +1,83 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, ImageBackground, Image, Dimensions, TouchableOpacity, FlatList, LogBox } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import InputText from '../../components/InputText';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/Feather';
 
-const Home = ({ navigation }) => {
 
+
+const DATA = [
+    {
+        id: "1",
+        image: require("../../assets/Splash.png"),
+        Text: "Customer no 1",
+        date: "21/06/2020",
+        icon: ""
+
+    },
+    {
+        image: require("../../assets/Splash.png"),
+        Text: "Customer no 2",
+        date: "21/06/2020",
+        icon: ""
+    },
+];
+
+const DATA1 = [
+    {
+        id: "1",
+        image: require("../../assets/Splash.png"),
+        Text: "Invoice no # 001",
+        date: "21/06/2020",
+        button: "Active",
+
+
+    },
+    {
+        id: "2",
+        image: require("../../assets/Splash.png"),
+        Text: "Invoice no # 002",
+        date: "21/06/2020",
+        button: "Closed"
+    },
+    {
+        id: "3",
+        image: require("../../assets/Splash.png"),
+        Text: "Invoice no # 001",
+        date: "21/06/2020",
+        button: "Active"
+    },
+    {
+        id: "4",
+        image: require("../../assets/Splash.png"),
+        Text: "Invoice no # 002",
+        date: "21/06/2020",
+        button: "Closed"
+    },
+    {
+        id: "4",
+        image: require("../../assets/Splash.png"),
+        Text: "Invoice no # 001",
+        date: "21/06/2020",
+        button: "Active"
+    },
+    {
+        id: "4",
+        image: require("../../assets/Splash.png"),
+        Text: "Invoice no # 002",
+        date: "21/06/2020",
+        button: "Closed"
+    },
+];
+
+
+
+
+const Home = ({ navigation }) => {
+    useEffect(() => {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    }, [])
     return (
         <ScrollView>
             <ImageBackground source={require('../../assets/Splash.png')} >
@@ -23,7 +94,91 @@ const Home = ({ navigation }) => {
 
                     <View style={styles.main}>
 
-                        <Text>Ali</Text>
+                        <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', top: 10 }}>
+                            <View >
+                                <Text style={{ color: 'black', fontSize: 20 }}>Customers</Text>
+                            </View>
+                            <TouchableOpacity style={styles.btnStyle}>
+                                <Text style={styles.textstyle}>See All</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{ flex: 3, }}>
+                            <FlatList
+                                // onRefresh={onRefresh}
+                                // refreshing={isFetching}
+                                // progressViewOffset={100}
+                                // ListEmptyComponent={<Empty message="No data found." />}
+                                data={DATA}
+                                keyExtractor={(item, index) => `${index}`}
+                                renderItem={({ item, index }) => {
+                                    return (
+                                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                                            <View style={styles.item}>
+                                                <View>
+                                                    <Image source={require('../../assets/uber.png')} style={{ height: 40, width: 40, }} />
+                                                </View>
+                                                <View>
+                                                    <Text style={styles.text1}>{item.Text}</Text>
+                                                    <Text>{item.date}</Text>
+
+                                                </View>
+
+                                                <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                                                    <Icon
+                                                        name="play-circle-filled"
+                                                        color='#2979FF'
+                                                        size={35}
+                                                        style={{ position: 'relative', }}
+                                                    />
+                                                </View>
+
+                                            </View>
+                                        </View>
+                                    )
+                                }} />
+                        </View>
+
+                        <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', }}>
+                            <View >
+                                <Text style={{ color: 'black', fontSize: 20 }}>Invoices</Text>
+                            </View>
+                            <TouchableOpacity style={styles.btnStyle}>
+                                <Text style={styles.textstyle}>See All</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{ flex: 5, }}>
+                            <FlatList
+                                // onRefresh={onRefresh}
+                                // refreshing={isFetching}
+                                // progressViewOffset={100}
+                                // ListEmptyComponent={<Empty message="No data found." />}
+                                data={DATA1}
+                                keyExtractor={(item, index) => `${index}`}
+                                renderItem={({ item, index }) => {
+                                    return (
+                                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                                            <View style={styles.item}>
+                                                <View>
+                                                    <Image source={require('../../assets/uber.png')} style={{ height: 40, width: 40, }} />
+                                                </View>
+                                                <View>
+                                                    <Text style={styles.text1}>{item.Text}</Text>
+                                                    <Text>{item.date}</Text>
+
+                                                </View>
+
+                                                <TouchableOpacity style={styles.btnStyle1}>
+                                                    <Text style={styles.textstyle1}>{item.button}</Text>
+                                                </TouchableOpacity>
+
+                                            </View>
+                                        </View>
+                                    )
+                                }} />
+                        </View>
+
                     </View>
 
                 </View>
@@ -50,10 +205,18 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         backgroundColor: 'white',
         borderTopEndRadius: 20,
-        borderTopStartRadius: 20,
-        alignItems: 'center',
         paddingHorizontal: '7%'
     },
+    item: {
+        flex: 1,
+        paddingVertical: "5%",
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomColor: 'grey',
+        borderBottomWidth: 0.5,
+        justifyContent: 'space-between'
+    },
+
     inputIcon: {
         position: 'absolute',
         alignSelf: 'flex-end',
@@ -69,33 +232,9 @@ const styles = StyleSheet.create({
         top: 15,
     },
     text1: {
-        fontSize: 30,
+        fontSize: 16,
         fontWeight: 'bold',
-        color: '#7A7A7A',
-        alignSelf: 'center',
-        top: 20,
-    },
-    text2: {
-        fontSize: 16,
-        color: '#1D2226',
-        alignSelf: 'center',
-        top: 20,
-    },
-    text3: {
-        fontSize: 16,
-        color: '#176EFF',
-        top: 20,
-    },
-    text4: {
-        fontSize: 12,
-        color: '#1D2226',
-        top: 10,
-        alignSelf: 'center',
-    },
-    text5: {
-        color: '#176EFF',
-        top: 10,
-        alignSelf: 'center',
+        color: '#000',
     },
 
     textInput: {
@@ -107,7 +246,42 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: 15,
         top: 10
-    }
+    },
+    btnStyle: {
+        width: 50,
+        height: 25,
+        alignItems: 'center',
+        // alignSelf: 'center',
+        justifyContent: 'center',
+        // backgroundColor: 'green',
+        borderRadius: 20,
+        borderColor: '#2979FF',
+        borderWidth: 2,
+
+    },
+    textstyle: {
+        fontSize: 11,
+        fontWeight: '300',
+        color: '#2979FF',
+
+    },
+    btnStyle1: {
+
+        alignItems: 'center',
+        // alignSelf: 'center',
+        justifyContent: 'flex-end',
+        // backgroundColor: 'green',
+        borderRadius: 20,
+        borderColor: '#2979FF',
+        borderWidth: 2,
+
+    },
+    textstyle1: {
+        fontSize: 11,
+        fontWeight: '300',
+        color: '#2979FF',
+
+    },
 });
 
 export default Home;

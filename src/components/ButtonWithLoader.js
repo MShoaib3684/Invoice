@@ -9,9 +9,11 @@ const ButtonWithLoader = ({
 }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.btnStyle}>
+            {/* <TouchableOpacity onPress={onPress} style={styles.btnStyle1}> */}
             <Text style={styles.textstyle}>{text}</Text>
             <Text style={styles.textstyle1}>{text1}</Text>
         </TouchableOpacity>
+        // </TouchableOpacity>
     );
 };
 
@@ -21,6 +23,14 @@ const styles = StyleSheet.create({
     btnStyle: {
         height: 50,
         width: 300,
+        backgroundColor: "#2979FF",
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: 30,
+    },
+    btnStyle1: {
+        height: 50,
+        width: 200,
         backgroundColor: "#2979FF",
         alignItems: 'center',
         alignSelf: 'center',

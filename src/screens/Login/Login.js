@@ -68,7 +68,7 @@ const Login = ({ navigation }) => {
                                     onChangeText={(email) => updateState({ email })}
                                 />
                                 <Icon1
-                                    name="user"
+                                    name="mail"
                                     color='grey'
                                     size={25}
                                     style={styles.inputIcon}

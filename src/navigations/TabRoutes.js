@@ -1,6 +1,6 @@
 import React from 'react';
 import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Profile, Invoices, Analytics, Customer, Customers } from '..';
+import { Home, Profile, Invoices, Analytics, Customer, Customers, Invoice1 } from '..';
 import { Image, Text } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -13,6 +13,7 @@ const Stack = createNativeStackNavigator();
 
 const TabRoutes = ({ navigation }) => {
     return (
+
         <BottomTab.Navigator
             barStyle={{ paddingBottom: 50 }}
             tabBar={(tabsProps, barStyle) => (
@@ -24,6 +25,8 @@ const TabRoutes = ({ navigation }) => {
             screenOptions={{ header: () => null }}
 
         >
+
+
             <BottomTab.Screen name="Home" component={Home}
                 options={{
                     // headerShown: false,
@@ -70,8 +73,10 @@ const TabRoutes = ({ navigation }) => {
                     //     <Text>Customers</Text>
                     // ),
                     tabBarIcon: ({ focused }) => (
-                        <Image source={require('../assets/c.png')}
-                            style={{ color: focused ? '#2979FF' : '#777777', opacity: focused ? 1 : 1 }} />
+                        <Icon name="format-list-bulleted" size={25}
+                            style={{
+                                color: focused ? '#2979FF' : '#777777', opacity: focused ? 1 : 1
+                            }} />
                     ),
                 }}
             />

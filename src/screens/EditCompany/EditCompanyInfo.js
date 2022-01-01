@@ -7,22 +7,25 @@ import { showError } from '../utils/helperFunction';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/Feather';
 
-const EditProfile = ({ navigation }) => {
+const EditCompanyInfo = ({ navigation }) => {
     const [state, setState] = useState({
         isLoading: false,
         userName: '',
-        email: '',
-        password: '',
+        location: '',
+        phoneNo: '',
+        website: '',
+        KeyboardEvent: 'numpad',
         isSecure: true
     })
-    const { isLoading, userName, email, password, isSecure } = state
+    const { isLoading, userName, location, phoneNo, website, isSecure } = state
     const updateState = (data) => setState(() => ({ ...state, ...data }))
 
     const isValidData = () => {
         const error = validator({
             userName,
-            email,
-            password
+            location,
+            phoneNo,
+            website
         })
         if (error) {
             showError(error)
@@ -52,7 +55,7 @@ const EditProfile = ({ navigation }) => {
             <ImageBackground source={require('../../assets/Splash.png')} >
                 <View style={styles.container}>
                     <View style={{ flex: 1.5, justifyContent: 'center', marginLeft: 30 }}>
-                        <Text style={{ fontSize: 50, color: '#fff', fontWeight: 'bold' }}>Edit Profile</Text>
+                        <Text style={{ fontSize: 35, color: '#fff', fontWeight: 'bold' }}>Edit Company Info</Text>
                     </View>
 
                     <View style={styles.main}>
@@ -70,7 +73,7 @@ const EditProfile = ({ navigation }) => {
                         <View style={styles.textInput}>
                             <View>
                                 <InputText
-                                    placeHolder="Username"
+                                    placeHolder="Name"
                                     onChangeText={(userName) => updateState({ userName })}
                                 />
                                 <Icon1
@@ -82,11 +85,11 @@ const EditProfile = ({ navigation }) => {
                             </View>
                             <View>
                                 <InputText
-                                    placeHolder="Email Address"
-                                    onChangeText={(email) => updateState({ email })}
+                                    placeHolder="Location"
+                                    onChangeText={(location) => updateState({ location })}
                                 />
-                                <Icon1
-                                    name="mail"
+                                <Icon
+                                    name="location-on"
                                     color='grey'
                                     size={25}
                                     style={styles.inputIcon}
@@ -94,13 +97,25 @@ const EditProfile = ({ navigation }) => {
                             </View>
                             <View>
                                 <InputText
-                                    placeHolder="Password"
-                                    isSecure={isSecure}
-                                    secureTextEntry={isSecure}
-                                    onChangeText={(password) => updateState({ password })}
+                                    placeHolder="Phone No"
+                                    numpad='true'
+                                    onChangeText={(phoneNo) => updateState({ phoneNo })}
                                 />
                                 <Icon
-                                    name="lock-outline"
+                                    name="phone"
+                                    color='grey'
+                                    size={25}
+                                    style={styles.inputIcon}
+                                />
+                            </View>
+                            <View>
+                                <InputText
+                                    placeHolder="Website"
+
+                                    onChangeText={(website) => updateState({ website })}
+                                />
+                                <Icon
+                                    name="language"
                                     color='grey'
                                     size={25}
                                     style={styles.inputIcon}
@@ -191,7 +206,7 @@ const styles = StyleSheet.create({
     },
 
     textInput: {
-        flex: 2,
+        flex: 5,
         backgroundColor: '#fff',
         top: 30,
     },
@@ -203,4 +218,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EditProfile;
+export default EditCompanyInfo;

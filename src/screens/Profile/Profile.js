@@ -11,7 +11,7 @@ import Icon1 from 'react-native-vector-icons/Feather';
 const Profile = ({ navigation }) => {
 
     const onLogout = () => {
-        navigation.navigate('Login')
+        navigation.navigate('Home')
     }
 
     return (
@@ -25,25 +25,59 @@ const Profile = ({ navigation }) => {
                     <View style={styles.main}>
 
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
-                            <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
+                            <View style={{ flex: 5, backgroundColor: '#fff', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                                    <Text style={{ fontSize: 20, color: 'black', fontWeight: '400' }} >Select Currency</Text>
+                                    <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} >Select Currency</Text>
+
                                 </TouchableOpacity>
+
                             </View>
-                            <View style={{ flex: 2, backgroundColor: '', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                <Icon
+
+                            <View style={{ flex: 2, backgroundColor: '#fff', alignItems: 'flex-end', justifyContent: 'center' }}>
+                                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
+                                    <View style={{ flex: 1.5, backgroundColor: '#fff', }}>
+                                        <Text style={{ color: 'black', left: 10 }}>PKR</Text>
+                                    </View>
+                                    <View style={{ flex: 1, backgroundColor: '#fff', right: 15 }}>
+                                        <Icon
+                                            name="arrow-drop-down"
+                                            color='grey'
+                                            size={50}
+                                            style={{ position: 'relative', }}
+                                        />
+                                    </View>
+                                </View>
+                                {/* <Icon
                                     name="arrow-drop-down"
                                     color='grey'
                                     size={50}
                                     style={{ position: 'relative', }}
+                                /> */}
+
+                            </View>
+
+                        </View>
+
+                        <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
+                            <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                                    <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} > Edit Profile</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 2, backgroundColor: '', alignItems: 'flex-end', justifyContent: 'center' }}>
+                                <Icon
+                                    name="arrow-right"
+                                    color='grey'
+                                    size={50}
+                                    style={{ position: 'relative', }}
                                 />
                             </View>
                         </View>
 
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                             <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                                    <Text style={{ fontSize: 20, color: 'black', fontWeight: '400' }} > Edit Profile</Text>
+                                <TouchableOpacity onPress={() => navigation.navigate('EditCompanyInfo')}>
+                                    <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} > Edit Company Info</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flex: 2, backgroundColor: '', alignItems: 'flex-end', justifyContent: 'center' }}>
@@ -59,23 +93,7 @@ const Profile = ({ navigation }) => {
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                             <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                                    <Text style={{ fontSize: 20, color: 'black', fontWeight: '400' }} > Edit Company Info</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 2, backgroundColor: '', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                <Icon
-                                    name="arrow-right"
-                                    color='grey'
-                                    size={50}
-                                    style={{ position: 'relative', }}
-                                />
-                            </View>
-                        </View>
-
-                        <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
-                            <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                                    <Text style={{ fontSize: 20, color: 'black', fontWeight: '400' }} >About Us</Text>
+                                    <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} >About Us</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flex: 2, backgroundColor: '', alignItems: 'flex-end', justifyContent: 'center' }}>
@@ -92,7 +110,7 @@ const Profile = ({ navigation }) => {
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                             <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-                                    <Text style={{ fontSize: 20, color: 'black', fontWeight: '400' }} >Rate Us</Text>
+                                    <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} >Rate Us</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flex: 2, backgroundColor: '', alignItems: 'flex-end', justifyContent: 'center' }}>
@@ -106,7 +124,7 @@ const Profile = ({ navigation }) => {
                         </View>
 
                         <View style={{ flex: 0.30, justifyContent: 'flex-end', }}>
-                            <TouchableOpacity style={styles.btnStyle} onpress={onLogout}>
+                            <TouchableOpacity style={styles.btnStyle} onPress={onLogout}>
                                 <Text style={styles.textstyle}>Logout</Text>
                             </TouchableOpacity>
 
