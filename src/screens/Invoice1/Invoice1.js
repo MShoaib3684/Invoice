@@ -4,13 +4,98 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import RBSheet from "react-native-raw-bottom-sheet";
 import Setting from '../Setting/Setting';
+import Icon1 from "react-native-dynamic-vector-icons";
 import { RadioButton } from 'react-native-paper';
 // import { RadioButton } from 'react-native'
-
+import { RoundedCheckbox, PureRoundedCheckbox, } from "react-native-rounded-checkbox";
 
 const Invoice1 = ({ navigation }) => {
     const refRBSheet = useRef();
-    const [checked, setChecked] = React.useState('Active');
+    const [checked, setChecked] = React.useState(false);
+    const [checked1, setChecked1] = React.useState(false);
+    const [checked2, setChecked2] = React.useState(false);
+    // const [checked3, setChecked3] = React.useState(false);
+
+
+    const renderIconCheckbox = (
+        checkedColor: string,
+        uncheckedColor: string,
+        isChecked: boolean,
+        checkedValue: boolean,
+        onPress: (checked: boolean) => void,
+    ) => (
+        <View style={{ marginLeft: 1 }}>
+            <PureRoundedCheckbox
+                text="L"
+                isChecked={isChecked}
+                checkedColor={checkedColor}
+                uncheckedColor={uncheckedColor}
+                onPress={onPress}
+            >
+                <Icon1
+                    size={26}
+                    name="check"
+                    type="Entypo"
+                    color={checkedValue ? "#fdfdfd" : "transparent"}
+                />
+            </PureRoundedCheckbox>
+        </View>
+    );
+
+
+
+    const renderColorCheckboxes = () => (
+        <View style={{ backgroundColor: '#fff', }}>
+
+            <View
+                style={{
+                    // backgroundColor: 'green',
+
+                    right: 8,
+                    flexDirection: "row",
+                }}
+            >
+                {renderIconCheckbox("#fff", "#08b5ca", true, checked, () =>
+                    setChecked(!checked),
+                )}
+            </View>
+        </View>
+    );
+
+    const renderColorCheckboxes1 = () => (
+        <View style={{ backgroundColor: '#fff', }}>
+
+            <View
+                style={{
+                    // backgroundColor: 'green',
+
+                    right: 8,
+                    flexDirection: "row",
+                }}
+            >
+                {renderIconCheckbox("#fff", "#08b5ca", true, checked1, () =>
+                    setChecked1(!checked1),
+                )}
+            </View>
+        </View>
+    );
+    const renderColorCheckboxes2 = () => (
+        <View style={{ backgroundColor: '#fff', }}>
+
+            <View
+                style={{
+                    // backgroundColor: 'green',
+
+                    right: 8,
+                    flexDirection: "row",
+                }}
+            >
+                {renderIconCheckbox("#fff", "#08b5ca", true, checked2, () =>
+                    setChecked2(!checked2),
+                )}
+            </View>
+        </View>
+    );
     return (
         <>
             <RBSheet
@@ -50,42 +135,45 @@ const Invoice1 = ({ navigation }) => {
                     </View>
 
 
-                    <View style={{ flex: 3, }}>
+                    <View style={{ flex: 4, }}>
                         <View style={styles.radio}>
-                            <RadioButton
+                            {/* <RoundedCheckbox
                                 value="Active"
                                 color='#2979FF'
                                 status={checked === 'Active' ? 'checked' : 'unchecked'}
                                 onPress={() => setChecked('Active')}
-                            />
+                            /> */}
+                            {renderColorCheckboxes()}
                             <View>
                                 <Text style={{ fontSize: 20, color: '#000' }}>Active</Text>
                             </View>
                         </View>
                         <View style={styles.radio}>
-                            <RadioButton
+                            {/* <RadioButton
                                 value="Pending"
                                 color='#2979FF'
                                 status={checked === 'Pending' ? 'checked' : 'unchecked'}
                                 onPress={() => setChecked('Pending')}
-                            />
+                            /> */}
+                            {renderColorCheckboxes1()}
                             <View>
                                 <Text style={{ fontSize: 20, color: '#000' }}>Pending</Text>
                             </View>
                         </View>
                         <View style={styles.radio}>
-                            <RadioButton
+                            {/* <RadioButton
                                 value="Completed"
                                 color='#2979FF'
                                 status={checked === 'Completed' ? 'checked' : 'unchecked'}
                                 onPress={() => setChecked('Completed')}
-                            />
+                            /> */}
+                            {renderColorCheckboxes2()}
                             <View>
                                 <Text style={{ fontSize: 20, color: '#000' }}>Completed</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={[styles.btnStyle1, { flex: 1, margin: 15 }]}>
+                    <View style={[{ flex: 1, margin: 15 }]}>
                         <ButtonWithLoader
                             text1='Update'
                         />
@@ -273,7 +361,7 @@ const styles = StyleSheet.create({
         color: '#000',
     },
     radio: {
-        flex: 1,
+        flex: 3,
         alignItems: 'center',
         // backgroundColor: 'green',
         flexDirection: 'row',

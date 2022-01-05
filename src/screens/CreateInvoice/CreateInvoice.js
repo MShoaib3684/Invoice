@@ -7,10 +7,13 @@ import Setting from '../Setting/Setting';
 import { RadioButton, Checkbox } from 'react-native-paper';
 import InputText from '../../components/InputText';
 import Icon1 from 'react-native-vector-icons/Feather';
-import validator from '../utils/validations';
-import { showError } from '../utils/helperFunction';
+import validator from '../../utils/validations';
+import { showError } from '../../utils/helperFunction';
 import InputText1 from '../../components/InputText1';
 import InputTextArea from '../../components/InputTextArea';
+import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { space } from 'is_js';
 // import { RadioButton } from 'react-native'
 
 
@@ -29,10 +32,18 @@ const CreateInvoice = ({ navigation }) => {
         location: '',
         phoneNo: '',
         website: '',
+        description: '',
+        price: '',
+        quantity: '',
+        discount: '',
         KeyboardEvent: 'numpad',
         isSecure: true
     })
-    const { isLoading, userName, location, phoneNo, website, isSecure } = state
+    const { isLoading, userName, location, phoneNo, website,
+        description,
+        price,
+        quantity,
+        discount, isSecure } = state
     const updateState = (data) => setState(() => ({ ...state, ...data }))
 
     const isValidData = () => {
@@ -54,15 +65,13 @@ const CreateInvoice = ({ navigation }) => {
     }
 
 
-
-
     const onUpdate = () => {
 
         // alert("please Fill your email and Password")
         // if (email == '' || password == '') {
         //     return
         // }
-        alert('Items Addedd Successfully')
+        // alert('Items Addedd Successfully')
         const checkValid = isValidData()
         if (checkValid) {
             alert('Items Addedd Successfully')
@@ -83,7 +92,7 @@ const CreateInvoice = ({ navigation }) => {
                 height={500}
                 customStyles={{
                     wrapper: {
-                        // backgroundColor: "",
+                        // backgroundColor: "#000",
                         // backgroundColor: 'rgba(181,181, 181, 0.8)',
 
                     },
@@ -92,103 +101,116 @@ const CreateInvoice = ({ navigation }) => {
                     },
                     container: {
                         borderTopLeftRadius: 30,
-                        borderTopRightRadius: 30
+                        borderTopRightRadius: 30,
+
                     },
 
                 }}
             >
-                <View style={[styles.container, { justifyContent: 'space-between' }]}>
-                    <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', }}>
-                        <Text style={styles.text4}>Edit From (Company)</Text>
-                        <TouchableOpacity onPress={() => refRBSheet.current.close()}>
-                            <Icon
-                                name="highlight-off"
-                                color='grey'
-                                size={35}
-                            // style={styles.inputIcon}
-                            />
-                        </TouchableOpacity>
-                    </View>
 
+                <ScrollView
+                    bounces={false}
+                    showsVerticalScrollIndicator={false}
+                    style={styles.Scroll}
+                    contentContainerStyle={styles.ScrollContentContainer}
+                    nestedScrollEnabled={true}
+                >
 
-                    <View style={styles.main}>
-
-                        <View>
-                            <TouchableOpacity style={{ bottom: 10 }}>
-                                <Image source={require('../../assets/icon.png')} style={{ height: 70, width: 70, top: 20 }} />
+                    <View style={[styles.container1, { justifyContent: 'space-between', }]}>
+                        <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row', }}>
+                            <Text style={styles.text4}>Edit From (Company)</Text>
+                            <TouchableOpacity onPress={() => refRBSheet.current.close()}>
+                                <Icon
+                                    name="highlight-off"
+                                    color='grey'
+                                    size={35}
+                                // style={styles.inputIcon}
+                                />
                             </TouchableOpacity>
                         </View>
 
+                        {/* <ScrollView> */}
+                        <View style={styles.main}>
+                            <SafeAreaProvider>
+                                <View>
+                                    <TouchableOpacity style={{ bottom: 10 }}>
+                                        <Image source={require('../../assets/icon.png')} style={{ height: 70, width: 70, top: 20 }} />
+                                    </TouchableOpacity>
+                                </View>
+                            </SafeAreaProvider>
 
 
 
-                        <View style={styles.textInput}>
-                            <View>
-                                <InputText
-                                    placeHolder="Name"
-                                    onChangeText={(userName) => updateState({ userName })}
-                                />
-                                <Icon1
-                                    name="user"
-                                    color='grey'
-                                    size={25}
-                                    style={styles.inputIcon}
-                                />
-                            </View>
-                            <View>
-                                <InputText
-                                    placeHolder="Location"
-                                    onChangeText={(location) => updateState({ location })}
-                                />
-                                <Icon
-                                    name="location-on"
-                                    color='grey'
-                                    size={25}
-                                    style={styles.inputIcon}
-                                />
-                            </View>
-                            <View>
-                                <InputText
-                                    placeHolder="Phone No"
-                                    numpad='true'
-                                    onChangeText={(phoneNo) => updateState({ phoneNo })}
-                                />
-                                <Icon
-                                    name="phone"
-                                    color='grey'
-                                    size={25}
-                                    style={styles.inputIcon}
-                                />
-                            </View>
-                            <View>
-                                <InputText
-                                    placeHolder="Website"
+                            <View style={styles.textInput}>
+                                <View>
+                                    <InputText
+                                        placeHolder="Name"
+                                        onChangeText={(userName) => updateState({ userName })}
+                                    />
+                                    <Icon1
+                                        name="user"
+                                        color='grey'
+                                        size={25}
+                                        style={styles.inputIcon}
+                                    />
+                                </View>
+                                <View>
+                                    <InputText
+                                        placeHolder="Location"
+                                        onChangeText={(location) => updateState({ location })}
+                                    />
+                                    <Icon
+                                        name="location-on"
+                                        color='grey'
+                                        size={25}
+                                        style={styles.inputIcon}
+                                    />
+                                </View>
+                                <View>
+                                    <InputText
+                                        placeHolder="Phone No"
+                                        numpad='true'
+                                        onChangeText={(phoneNo) => updateState({ phoneNo })}
+                                    />
+                                    <Icon
+                                        name="phone"
+                                        color='grey'
+                                        size={25}
+                                        style={styles.inputIcon}
+                                    />
+                                </View>
+                                <View>
+                                    <InputText
+                                        placeHolder="Website"
 
-                                    onChangeText={(website) => updateState({ website })}
-                                />
-                                <Icon
-                                    name="language"
-                                    color='grey'
-                                    size={25}
-                                    style={styles.inputIcon}
+                                        onChangeText={(website) => updateState({ website })}
+                                    />
+                                    <Icon
+                                        name="language"
+                                        color='grey'
+                                        size={25}
+                                        style={styles.inputIcon}
+                                    />
+                                </View>
+
+                            </View>
+
+
+                            <View style={{ flex: 1, justifyContent: 'space-evenly', }}>
+                                <ButtonWithLoader
+                                    text1="Update"
+                                    onPress={onUpdate}
                                 />
                             </View>
+
 
                         </View>
-
-
-                        <View style={{ flex: 1, justifyContent: 'space-evenly', }}>
-                            <ButtonWithLoader
-                                text1="Update"
-                                onPress={onUpdate}
-                            />
-                        </View>
-
-
+                        {/* </ScrollView> */}
                     </View>
-
-                </View>
+                </ScrollView>
             </RBSheet>
+
+
 
             <RBSheet
                 ref={refRBSheetTo}
@@ -360,7 +382,7 @@ const CreateInvoice = ({ navigation }) => {
                                 <InputTextArea
                                     placeHolder="Description"
 
-                                    onChangeText={(website) => updateState({ website })}
+                                    onChangeText={(description) => updateState({ description })}
                                 />
 
                             </View>
@@ -369,25 +391,25 @@ const CreateInvoice = ({ navigation }) => {
                                 <InputText1
                                     placeHolder="Price"
 
-                                    onChangeText={(website) => updateState({ website })}
+                                    onChangeText={(price) => updateState({ price })}
                                 />
 
 
                                 <InputText1
                                     placeHolder="Quantity"
 
-                                    onChangeText={(website) => updateState({ website })}
+                                    onChangeText={(quantity) => updateState({ quantity })}
                                 />
                             </View>
                             <View>
                                 <InputText
                                     placeHolder="Discount (%)"
 
-                                    onChangeText={(website) => updateState({ website })}
+                                    onChangeText={(discount) => updateState({ discount })}
                                 />
                             </View>
                         </View>
-                        <View style={[styles.btnStyle, { flex: 1, }]}>
+                        <View style={{ flex: 1 }}>
                             <ButtonWithLoader
                                 text="Add"
                                 onPress={onUpdate}
@@ -399,6 +421,7 @@ const CreateInvoice = ({ navigation }) => {
 
                 </View>
             </RBSheet>
+
             <ScrollView>
                 <View style={styles.container}>
 
@@ -532,7 +555,7 @@ const CreateInvoice = ({ navigation }) => {
                         style={[styles.btnStyle1, { flex: 1, alignItems: 'center', justifyContent: 'center' }]}
                         onPress={() => refRBSheetAdd.current.open()}
                     >
-                        <Text style={{ color: 'grey', fontSize: 25 }}>Add +</Text>
+                        <Text style={{ color: 'grey', fontSize: 25 }}>Add + </Text>
                     </TouchableOpacity>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -576,12 +599,23 @@ const styles = StyleSheet.create({
         paddingHorizontal: '5%',
 
     },
+    container1: {
+        flex: 1,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        space: 1,
+        // paddingHorizontal: '5%',
+
+    },
     main: {
         flex: 10,
         // backgroundColor: 'green',
         borderTopEndRadius: 20,
         borderTopStartRadius: 20,
         alignItems: 'center',
+        // alignContent: 'space-around'
     },
     text: {
         fontSize: 25,

@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, ImageBackground, Image, Dimensions, TouchableOpacity } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import InputText from '../../components/InputText';
-import validator from '../utils/validations';
-import { showError } from '../utils/helperFunction';
+import validator from '../../utils/validations';
+import { showError } from '../../utils/helperFunction';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/Feather';
+import actions from '../../redux/actions';
+import { showMessage } from 'react-native-flash-message';
+
+
 
 const Signup = ({ navigation }) => {
     const [state, setState] = useState({
@@ -34,7 +38,7 @@ const Signup = ({ navigation }) => {
 
 
 
-    const onSignup = () => {
+    const onSignup = async () => {
 
         // alert("please Fill your email and Password")
         // if (email == '' || password == '') {
@@ -43,7 +47,25 @@ const Signup = ({ navigation }) => {
 
         const checkValid = isValidData()
         if (checkValid) {
-            navigation.navigate('Signup')
+            updateState({ isLoading: true })
+            try {
+                const res = await actions.signup({
+                    UserName: userName,
+                    Email: email,
+                    Password: password,
+                })
+                console.log("res of signup==>>>>>", res)
+                showMessage('Registered Successfully....!!!')
+                // if (!res.data.emailVerified) {
+                //     alert("Please verify your email")
+                // }
+                updateState({ isLoading: false })
+            } catch (error) {
+                console.log("error raised")
+                showError(error.message)
+                updateState({ isLoading: false })
+            }
+            navigation.navigate('Login')
         }
     }
 
@@ -115,10 +137,11 @@ const Signup = ({ navigation }) => {
                     </View>
 
 
-                    <View style={{ top: 60 }}>
+                    <View style={{ justifyContent: 'flex-end', flex: 0.8, }}>
                         <ButtonWithLoader
                             text="Signup"
                             onPress={onSignup}
+                            isLoading={isLoading}
                         />
                         <Text style={styles.text4}>
                             Have an account?

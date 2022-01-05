@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 
 const ButtonWithLoader = ({
+    isloading,
     text,
     onPress,
     text1,
@@ -12,6 +13,7 @@ const ButtonWithLoader = ({
             {/* <TouchableOpacity onPress={onPress} style={styles.btnStyle1}> */}
             <Text style={styles.textstyle}>{text}</Text>
             <Text style={styles.textstyle1}>{text1}</Text>
+            {<ActivityIndicator size='large' color='green' />}
         </TouchableOpacity>
         // </TouchableOpacity>
     );

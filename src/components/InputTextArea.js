@@ -48,12 +48,17 @@ const styles = StyleSheet.create({
     textAreaContainer: {
         borderColor: 'grey',
         borderWidth: 1.5,
-        borderRadius: 30,
+        borderRadius: 40,
+        // backgroundColor: 'green'
     },
     textArea: {
-        width: 150,
+        width: 300,
+        borderRadius: 30,
         height: 80,
-        paddingLeft: 20,
-        textAlignVertical: 'top'
+        paddingLeft: 30,
+        paddingRight: 30,
+        textAlignVertical: 'top',
+        // backgroundColor: 'red'
+
     }
 })

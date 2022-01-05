@@ -4,6 +4,7 @@ import ButtonWithLoader from '../../components/ButtonWithLoader';
 import InputText from '../../components/InputText';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/Feather';
+import { SvgXml } from 'react-native-svg';
 
 
 
@@ -26,7 +27,7 @@ const Profile = ({ navigation }) => {
 
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                             <View style={{ flex: 5, backgroundColor: '#fff', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                                <TouchableOpacity onPress={() => navigation.navigate('')}>
                                     <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} >Select Currency</Text>
 
                                 </TouchableOpacity>
@@ -92,7 +93,7 @@ const Profile = ({ navigation }) => {
 
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                             <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                                <TouchableOpacity onPress={() => navigation.navigate('')}>
                                     <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} >About Us</Text>
                                 </TouchableOpacity>
                             </View>
@@ -109,7 +110,7 @@ const Profile = ({ navigation }) => {
 
                         <View style={{ top: 20, flex: 0.15, backgroundColor: '#fff', flexDirection: 'row', borderBottomColor: 'grey', borderBottomWidth: 1 }}>
                             <View style={{ flex: 2, backgroundColor: '#fff', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+                                <TouchableOpacity onPress={() => navigation.navigate('')}>
                                     <Text style={{ fontSize: 18, color: 'black', fontWeight: '400' }} >Rate Us</Text>
                                 </TouchableOpacity>
                             </View>

@@ -5,8 +5,8 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import InputText from '../../components/InputText';
 import Icon1 from 'react-native-vector-icons/Feather';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
-import validator from '../utils/validations';
-import { showError } from '../utils/helperFunction';
+import validator from '../../utils/validations';
+import { showError } from '../../utils/helperFunction';
 
 
 

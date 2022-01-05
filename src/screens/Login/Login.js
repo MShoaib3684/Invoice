@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Dimensions, ImageBackground, Image, ScrollView } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import InputText from '../../components/InputText';
-import validator from '../utils/validations';
-import { showError } from '../utils/helperFunction';
+import validator from '../../utils/validations';
+import { showError } from '../../utils/helperFunction';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon1 from 'react-native-vector-icons/Feather';
 import TabRoutes from '../../navigations/TabRoutes';
+import actions from '../../redux/actions';
+
 
 const Login = ({ navigation }) => {
     const [state, setState] = useState({
@@ -31,9 +33,26 @@ const Login = ({ navigation }) => {
         return true
     }
 
-    const onLogin = () => {
+    const onLogin = async () => {
         const checkValid = isValidData()
         if (checkValid) {
+            updateState({ isLoading: true })
+            try {
+                const res = await actions.login({
+                    Email: email,
+                    Password: password
+                })
+                console.log("res of Login==>>>>>", res)
+                updateState({ isLoading: false })
+                // if (!res.data.emailVerified) {
+                //     alert("Please verify your email")
+                // }
+                // updateState({ isLoading: false })
+            } catch (error) {
+                console.log("error raised")
+                showError(error.message)
+                updateState({ isLoading: false })
+            }
             navigation.navigate('TabRoutes')
         }
     }
@@ -91,13 +110,14 @@ const Login = ({ navigation }) => {
                         </View>
 
                         <View style={{ alignSelf: 'flex-end' }}>
-                            <Text style={styles.text3} onPress={() => navigation.navigate('Signup')}> Forgot Password?</Text>
+                            <Text style={styles.text3} onPress={() => navigation.navigate('ForgotPassword')}> Forgot Password?</Text>
                         </View>
 
-                        <View style={{ top: 50 }}>
+                        <View style={{ justifyContent: 'flex-end', flex: 0.8, }}>
                             <ButtonWithLoader
                                 text="Login"
                                 onPress={onLogin}
+                                isLoading={isLoading}
                             />
                             <Text style={styles.text4}>
                                 Don't have an account?

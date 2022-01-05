@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Dimensions, ImageBackground, Image, ScrollView } from 'react-native';
 import ButtonWithLoader from '../../components/ButtonWithLoader';
 import InputText from '../../components/InputText';
-import validator from '../utils/validations';
-import { showError } from '../utils/helperFunction';
+import validator from '../../utils/validations';
+import { showError } from '../../utils/helperFunction';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon1 from 'react-native-vector-icons/Feather';
+import TabRoutes from '../../navigations/TabRoutes';
 
 const ResetPassword = ({ navigation }) => {
     const [state, setState] = useState({
         isLoading: false,
-        email: '',
         password: '',
         isSecure: true
+
     })
     const { isLoading, email, password, isSecure } = state
     const updateState = (data) => setState(() => ({ ...state, ...data }))
 
     const isValidData = () => {
         const error = validator({
-            email,
-            password
+            password,
         })
         if (error) {
             showError(error)
@@ -28,88 +29,155 @@ const ResetPassword = ({ navigation }) => {
         return true
     }
 
-
-
-
-    const onLogin = () => {
-
-        // alert("please Fill your email and Password")
-        // if (email == '' || password == '') {
-        //     return
-        // }
-
+    const onContinue = () => {
         const checkValid = isValidData()
         if (checkValid) {
-            navigation.navigate('Signup')
+            navigation.navigate('Login')
         }
     }
     return (
-        <View style={styles.container}>
-            <View style={styles.textInput} >
-                <Text style={{ fontSize: 20, fontWeight: '700', alignSelf: 'center', color: 'black', bottom: 50 }}>Reset Password?</Text>
-                <View style={styles.icon}>
-                    <Icon
-                        name="lock-outline"
-                        color='grey'
-                        size={25}
-                        style={styles.inputIcon}
-                    />
-                </View>
-                <InputText
-                    placeHolder="new password"
-                    isSecure={isSecure}
-                    secureTextEntry={isSecure}
-                    onChangeText={(password) => updateState({ password })}
-                />
-                <View style={styles.icon}>
-                    <Icon
-                        name="lock-outline"
-                        color='grey'
-                        size={25}
-                        style={styles.inputIcon}
-                    />
-                </View>
-                <InputText
-                    placeHolder="confirm new password"
-                    isSecure={isSecure}
-                    secureTextEntry={isSecure}
-                    onChangeText={(password) => updateState({ password })}
-                />
+        <>
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={{ flex: 2, justifyContent: 'center' }}>
+                        <ImageBackground source={require('../../assets/Splash.png')} style={{ height: "100%", width: "100%" }} >
+                            <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image source={require('../../assets/logo.png')} style={{ height: 100, width: 100, }} />
+                            </View>
+                        </ImageBackground>
+                    </View>
 
-            </View>
-            <View style={{ flex: 1, justifyContent: 'space-evenly' }}>
-                <ButtonWithLoader
-                    text="Continue"
-                    onPress={onLogin}
-                />
+                    <View style={styles.main}>
 
-            </View>
-        </View>
+                        <View>
+                            <Text style={styles.text}>Reset Password</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.text2}> Enter New Password</Text>
+                        </View>
+
+                        <View style={styles.textInput}>
+                            <View>
+                                <InputText
+                                    placeHolder="New Password"
+                                    secureTextEntry={isSecure}
+                                    onChangeText={(password) => updateState({ password })}
+                                />
+                                <Icon
+                                    name="lock-outline"
+                                    color='grey'
+                                    size={25}
+                                    style={styles.inputIcon}
+                                />
+                            </View>
+                            <View>
+                                <InputText
+                                    placeHolder="Confirm New Password"
+                                    secureTextEntry={isSecure}
+                                    onChangeText={(password) => updateState({ password })}
+                                />
+                                <Icon
+                                    name="lock-outline"
+                                    color='grey'
+                                    size={25}
+                                    style={styles.inputIcon}
+                                />
+                            </View>
+
+                        </View>
+
+                        <View style={{ flex: 1, justifyContent: 'space-around', top: 30 }}>
+                            <ButtonWithLoader
+                                text="Continue"
+                                onPress={onContinue}
+                            />
+
+                        </View>
+
+                    </View>
+
+                </View>
+            </ScrollView>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        backgroundColor: '#176EFF'
     },
-    textInput: {
-        flex: 3,
+    image: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        margin: 50,
-        backgroundColor: 'white'
+        alignContent: 'center',
+    },
+    main: {
+        flex: 5,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        backgroundColor: 'white',
+        borderTopEndRadius: 20,
+        borderTopStartRadius: 20,
+        alignItems: 'center',
+        paddingHorizontal: '7%'
+    },
+    text: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#176EFF',
+        alignSelf: 'center',
+        top: 15,
+    },
+    text1: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#7A7A7A',
+        alignSelf: 'center',
+        top: 20,
+    },
+    text2: {
+        fontSize: 16,
+        color: '#1D2226',
+        alignSelf: 'center',
+        top: 20,
+    },
+    text3: {
+        fontSize: 16,
+        color: '#176EFF',
+        top: 20,
+    },
+    text4: {
+        fontSize: 12,
+        color: '#1D2226',
+        top: 10,
+        alignSelf: 'center',
+    },
+    text5: {
+        color: '#176EFF',
+        top: 10,
+        alignSelf: 'center',
+    },
+
+    textInput: {
+        backgroundColor: 'white',
+        top: 30,
     },
     inputIcon: {
-
         position: 'absolute',
+        alignSelf: 'flex-end',
+        margin: 5,
+        right: 10,
+        top: 10
     },
     icon: {
         alignSelf: 'flex-start',
         marginLeft: 15,
         top: 10
     }
-
 });
 
 export default ResetPassword;

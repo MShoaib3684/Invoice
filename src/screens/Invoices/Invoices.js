@@ -1,7 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, Dimensions, ScrollView, FlatList, Image, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import { RoundedCheckbox, PureRoundedCheckbox, } from "react-native-rounded-checkbox";
+import validator from '../../utils/validations';
+import { showError } from '../../utils/helperFunction';
 
 const DATA = [
     {
